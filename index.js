@@ -3,13 +3,13 @@ const express = require('express');
 const server = express();
 const { client } = require('./db');
 client.connect();
+require('dotenv').config();
 
 server.listen(PORT, () => {  
     console.log('The server is up on port', PORT)
 });
 
-const apiRouter = require('./api');
-server.use('/api', apiRouter);
+
 
 const bodyParser = require('body-parser');
 server.use(bodyParser.json());
@@ -24,3 +24,6 @@ server.use((req, res, next) => {
   
     next();
   });
+  
+const apiRouter = require('./api');
+server.use('/api', apiRouter);
